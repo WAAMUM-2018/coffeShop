@@ -18,6 +18,7 @@ public class CoffeShopRestTemplateApplication {
 	public static void main(String[] args) {
 		//SpringApplication.run(CoffeShopRestTemplateApplication.class, args);
 		
+		// Creating three products
 		RestClient restClient  = new RestClient();
 		Product breakfast = new Product("c-1","Mexican Coffee", 12.5, ProductType.BREAKFAST);
 		Product lunch = new Product("c-2","Sri Lankan Coffee", 15.5, ProductType.LUNCH);
@@ -25,5 +26,23 @@ public class CoffeShopRestTemplateApplication {
 		restClient.saveProduct(breakfast);
 		restClient.saveProduct(lunch);
 		restClient.saveProduct(dinner);
+		
+		//Retrieving all products
+		restClient.getProducts();
+		
+		//update product
+		breakfast.setId(1);
+		breakfast.setDescription("Mexican Dark coffee");
+		restClient.updateProduct(breakfast);
+		
+		restClient.getProducts();
+		
+		//delete products
+		restClient.deleteProduct(2);
+		restClient.deleteProduct(5);
+		
+		restClient.getProducts();
+		
+		
 	}
 }
