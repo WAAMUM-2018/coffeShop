@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.mum.coffee.service;
+package edu.mum.coffee.controller;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.mum.coffee.domain.Order;
+import edu.mum.coffee.service.OrderService;
 
 /**
  * @author jeewa
