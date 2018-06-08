@@ -47,9 +47,9 @@ public class ProductController {
 		return "createOrEditProduct";
 	}
 
-	@RequestMapping(value = {"/createOrEdit"}, method = RequestMethod.POST)
-	public String createProduct(@ModelAttribute Product product, Model model) {
-		System.out.println(product.getDescription());
+	@RequestMapping(value = {"/createOrEdit","/edit/createOrEdit"}, method = RequestMethod.POST)
+	public String createProduct(@ModelAttribute("product") Product product, Model model) {
+		System.out.println(product.getId());
 		productService.save(product);
 		return "redirect:/product/list";
 	}
@@ -59,11 +59,6 @@ public class ProductController {
 		List <ProductType> productTypes = new ArrayList<ProductType> (Arrays.asList(ProductType.values()));
         model.addAttribute("productTypes", productTypes);
 	}
-	/*
-	 * @RequestMapping(value = "/product/edit", method = RequestMethod.PUT) public
-	 * Product editProduct(@RequestBody Product product) {
-	 * productService.save(product); return product; }
-	 */
 
 	@GetMapping(value = {"/list"})
 	public String listAllProduct(Model model) {
