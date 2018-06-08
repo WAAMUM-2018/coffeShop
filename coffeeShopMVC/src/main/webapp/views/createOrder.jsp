@@ -7,28 +7,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add Product</title>
+<title>Create Order</title>
 </head>
 <body>
-	<form:form modelAttribute="product" action="createOrEdit" method="post">
+	<form:form modelAttribute="orderline" action="createOrder"
+		method="post">
 		<table>
-
-			<form:input type="number" path="id" hidden="true" />
+			<form:input type="number" path="id" hidden="true"/>
+			<form:input type="number" path="order.id" hidden="true"/>
 			<tr>
-				<td>Product Name:</td>
-				<td><form:input type="text" path="productName" /></td>
+				<td>Product:</td>
+				<td><form:select path="product.id">
+						<c:forEach items="${products}" var="product">
+							<option value="${product.id}">${product.productName}</option>
+						</c:forEach>
+					</form:select></td>
 			</tr>
 			<tr>
-				<td>Description:</td>
-				<td><form:input type="text" path="description" /></td>
-			</tr>
-			<tr>
-				<td>Price:</td>
-				<td><form:input type="text" path="price" /></td>
-			</tr>
-			<tr>
-				<td>Product Type:</td>
-				<td><form:select path="productType" items="${productTypes}" /></td>
+				<td>Quantity:</td>
+				<td><form:input type="number" path="quantity" /></td>
 			</tr>
 		</table>
 		<input type="submit" />
