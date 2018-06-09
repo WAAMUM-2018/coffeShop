@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.mum.coffee.domain.Person;
+import edu.mum.coffee.domain.Role;
 import edu.mum.coffee.service.PersonService;
+import edu.mum.coffee.service.RoleService;
 
 /**
  * @author jeewa
@@ -26,16 +28,26 @@ public class PersonController {
 
 	@Autowired
 	PersonService personService;
+	
+	@Autowired
+	RoleService roleService;
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String createPerson(Model model) {
 		Person person = new Person();
 		model.addAttribute("person", person);
-		return "createPerson";
+		model.addAttribute("edit" , false);
+		return "person";
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String createPerson(@ModelAttribute("person") Person person) {
+		/*Set the role as USER*/
+		if(person.getUser() != null) {
+			Role role = roleService.findById(1);
+			person.getUser().addRole(role);
+		}
+		
 		personService.savePerson(person);
 		return "redirect:/person/list";
 	}
@@ -44,7 +56,8 @@ public class PersonController {
 	public String editPerson(@RequestParam("personId") Long personId, Model model) {
 		Person person = personService.findById(personId);
 		model.addAttribute("person", person);
-		return "createPerson";
+		model.addAttribute("edit" , true);
+		return "person";
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
