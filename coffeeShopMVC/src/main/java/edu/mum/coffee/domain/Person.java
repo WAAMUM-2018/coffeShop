@@ -74,4 +74,8 @@ public class Person {
 		this.phone = phone;
 	}
 
+	public void setId(long id) {
+		this.id = id;
+	}
+
 }
