@@ -1,6 +1,8 @@
 package edu.mum.coffee.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -15,9 +17,9 @@ public class Orderline {
 	@GeneratedValue
 	private int id;
 	private int quantity;
-	@OneToOne
+	@OneToOne(fetch =FetchType.EAGER , cascade = CascadeType.ALL)
 	private Product product;
-	@ManyToOne
+	@ManyToOne(fetch =FetchType.EAGER , cascade = CascadeType.ALL)
 	private Order order;
 
 	public int getQuantity() {

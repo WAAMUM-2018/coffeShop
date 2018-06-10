@@ -44,7 +44,7 @@ public class PersonController {
 	public String createPerson(@ModelAttribute("person") Person person) {
 		/*Set the role as USER*/
 		if(person.getUser() != null) {
-			Role role = roleService.findById(1);
+			Role role = roleService.findById(2);
 			person.getUser().addRole(role);
 		}
 		
