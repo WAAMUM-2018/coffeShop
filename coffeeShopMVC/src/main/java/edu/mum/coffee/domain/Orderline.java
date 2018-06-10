@@ -17,9 +17,9 @@ public class Orderline {
 	@GeneratedValue
 	private int id;
 	private int quantity;
-	@OneToOne(fetch =FetchType.EAGER , cascade = CascadeType.ALL)
+	@OneToOne(fetch =FetchType.EAGER)
 	private Product product;
-	@ManyToOne(fetch =FetchType.EAGER , cascade = CascadeType.ALL)
+	@ManyToOne(fetch =FetchType.EAGER)
 	private Order order;
 
 	public int getQuantity() {

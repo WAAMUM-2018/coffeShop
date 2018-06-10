@@ -46,7 +46,7 @@ public class OrderLineController {
 	}
 
 	@RequestMapping(value = { "/createOrder" }, method = RequestMethod.POST)
-	public String createProduct(@ModelAttribute("orderline") Orderline orderLine, Model model) {
+	public String createOrder(@ModelAttribute("orderline") Orderline orderLine, Model model) {
 		Order order = orderLine.getOrder();
 		if (order == null) {
 			order = new Order();

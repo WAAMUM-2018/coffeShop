@@ -26,10 +26,16 @@
 							class="btn btn-default pull-right"> Register</a>
 					</c:when>
 					<c:otherwise>
-						<a href="<spring:url value="/dashboard" />"
-							class="btn btn-default pull-right">Dashboard</a>
 						<a href="<spring:url value='/logout' />"
 							class="btn btn-default pull-right"> Logout</a>
+						<sec:authorize access="hasAuthority('ADMIN') or hasAuthority('USER')">
+							<a href="<spring:url value="/orderline/create?orderId=-1" />"
+								class="btn btn-default pull-right">Place an Order</a>
+						</sec:authorize>
+						<sec:authorize access="hasAuthority('ADMIN')">
+							<a href="<spring:url value="/person/list" />"
+								class="btn btn-default pull-right">Persons</a>
+						</sec:authorize>
 					</c:otherwise>
 				</c:choose>
 				<a href="<spring:url value="/product/list" />"

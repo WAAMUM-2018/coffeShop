@@ -15,7 +15,7 @@
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
 <body>
-	<div class="generic-container">
+	<div class="container">
 		<%@include file="authheader.jsp"%>
 		<div class="panel panel-default">
 			<!-- Default panel contents -->
@@ -48,11 +48,12 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<sec:authorize access="hasAuthority('ADMIN')">
+		</div>
+		<sec:authorize access="hasAuthority('ADMIN')">
 				<a href="<spring:url value="/product/create" />"
 					class="btn btn-primary btn-smt">Add Product</a>
 			</sec:authorize>
-		</div>
+		
 	</div>
 </body>
 </html>
