@@ -50,8 +50,8 @@
 			</div>
 		</div>
 		<img
-			src="https://s.hswstatic.com/gif/mt-everest-tourism-171676392.jpg"
-			alt="Everest Image"
+			src="https://images.unsplash.com/photo-1449198063792-7d754d6f3c80?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=eb09a1b793f7cb1dca37311f2af4d91d&w=1000&q=80"
+			alt="Coffee shop"
 			style="width: 1250px; height: 340px; margin-top: -20px; margin-left: 20px" />
 	</section>
 
