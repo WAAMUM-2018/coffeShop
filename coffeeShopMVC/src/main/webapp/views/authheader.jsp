@@ -1,7 +1,10 @@
-<div class="authbar">
+<div class="container">
 <c:choose>
 	<c:when test="${pageContext.request.userPrincipal != null}">
-    <span>Dear <strong>${loggedinuser}</strong>, Welcome to CrazyUsers.</span> <span class="float-right"><a href="<c:url value="/logout" />">Logout</a></span>
+    <a href="<c:url value="/logout" />" class="navbar-brand pull-right">Logout</a>
 </c:when>
 </c:choose>
+<a href="<spring:url value="/" />"
+								class="navbar-brand pull-right">Home</a>
+
 </div>
