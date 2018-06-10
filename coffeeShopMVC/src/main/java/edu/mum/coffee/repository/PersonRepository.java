@@ -9,8 +9,9 @@ import org.springframework.stereotype.Repository;
 import edu.mum.coffee.domain.Person;
 
 @Repository
-public interface PersonRepository extends JpaRepository<Person, Long> {
+public interface PersonRepository extends JpaRepository<Person, Long>, PersonRepositoryCustom{
 
 	public List<Person> findByEmail(String email);
+	public Person findByUserId(String userId);
 	
 }

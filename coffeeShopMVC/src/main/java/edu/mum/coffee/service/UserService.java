@@ -6,7 +6,6 @@ package edu.mum.coffee.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.authentication.UserCredentials;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,13 +21,17 @@ import edu.mum.coffee.repository.UserRepository;
 public class UserService {
 
 	@Autowired
-	UserRepository userRespository;
+	UserRepository userRepository;
 
 	public User savePerson(User userCredentials) {
-		return userRespository.save(userCredentials);
+		return userRepository.save(userCredentials);
 	}
 
 	public List<User> findAll() {
-		return userRespository.findAll();
+		return userRepository.findAll();
+	}
+	
+	public User findById(String id) {
+		return userRepository.findOne(id);
 	}
 }
