@@ -8,26 +8,46 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Order Details</title>
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
 <body>
-	<h1>Order</h1>
-	<p>Order Id: ${order.id }</p>
-	<p>Order Date: ${order.orderDate }</p>
-	<table>
-		<c:forEach var="orderline" items="${order.orderLines}">
-			<tr>
-				<td>${orderline.id}</td>
-				<td>${orderLines.product.productName}</td>
-				<td>${orderline.quantity}</td>
-				<td><a
-					href="<spring:url value= "/orderline/edit/${product.id}"/>">edit</a></td>
-				<td><a
-					href="<spring:url value= "/orderline/remove/${product.id}"/>">delete</a></td>
-			</tr>
-		</c:forEach>
-	</table>
+	<div class="generic-container">
+		<%@include file="authheader.jsp"%>
+		<div class="panel panel-default">
+			<!-- Default panel contents -->
+			<div class="panel-heading">
+				<span class="lead">Order - Order Id: ${order.id }   Order Date:
+					${order.orderDate }</span>
+			</div>
+			<table class="table table-hover">
+			<thead>
+                    <tr>
+                        <th>Order Line Id</th>
+                        <th>Product Name</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+				<c:forEach var="orderline" items="${order.orderLines}">
+					<tr>
+						<td>${orderline.id}</td>
+						<td>${orderLines.product.productName}</td>
+						<td>${orderLines.product.description}</td>
+						<td>${orderLines.product.price}</td>
+						<td>${orderline.quantity}</td>
+						<td><a
+							href="<spring:url value= "/orderline/edit/${product.id}"/>" class="btn btn-success custom-width">edit</a></td>
+						<td><a
+							href="<spring:url value= "/orderline/remove/${product.id}"/>" class="btn btn-danger custom-width">delete</a></td>
+					</tr>
+				</c:forEach>
+			</table>
 
-	<a href="<spring:url value="/orderline/create?orderId=${order.id}" />"
-		class="btn btn-default pull-right">Add Order Line</a>
+			<a
+				href="<spring:url value="/orderline/create?orderId=${order.id}" />"
+				class="btn btn-primary btn-smt">Add Order Line</a>
+		</div>
+	</div>
 </body>
 </html>
