@@ -6,8 +6,6 @@
 	<artifactId>coffeeShopMVC</artifactId>
 	<name>coffeeShopMVC</name>
 	<packaging>jar</packaging>
-
-
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>

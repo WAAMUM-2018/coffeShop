@@ -6,6 +6,8 @@ package edu.mum.coffee.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import edu.mum.coffee.domain.Person;
 import edu.mum.coffee.domain.Role;
 import edu.mum.coffee.service.PersonService;
@@ -28,7 +31,7 @@ public class PersonController {
 
 	@Autowired
 	PersonService personService;
-	
+
 	@Autowired
 	RoleService roleService;
 
@@ -36,27 +39,35 @@ public class PersonController {
 	public String createPerson(Model model) {
 		Person person = new Person();
 		model.addAttribute("person", person);
-		model.addAttribute("edit" , false);
+		model.addAttribute("edit", false);
 		return "person";
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String createPerson(@ModelAttribute("person") Person person) {
-		/*Set the role as USER*/
-		if(person.getUser() != null) {
+		/* Set the role as USER */
+		if (person.getUser() != null) {
 			Role role = roleService.findById(2);
 			person.getUser().addRole(role);
 		}
-		
+
 		personService.savePerson(person);
 		return "redirect:/person/list";
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String editPerson(@RequestParam("personId") Long personId, Model model) {
-		Person person = personService.findById(personId);
+	public String getEditPerson(@RequestParam("personId") Long personId, Model model) {
+		Person person;
+		
+		if (personId > 0) {
+			person = personService.findById(personId);
+		} else {
+			/* To fetch person details by user id */
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			person = personService.findByUserId(auth.getName());
+		}
 		model.addAttribute("person", person);
-		model.addAttribute("edit" , true);
+		model.addAttribute("edit", true);
 		return "person";
 	}
 

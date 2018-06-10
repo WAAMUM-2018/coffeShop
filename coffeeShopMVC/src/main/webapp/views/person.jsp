@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 
@@ -134,16 +135,16 @@
 						</div>
 						<div class="row">
 							<div class="form-group col-md-12 col-lg-12">
-								<label class="col-md-3 col-lg-3 control-lable" for="email"></label>
+								<label class="col-md-3 col-lg-3 control-lable" for="country"></label>
 								<div class="col-md-7 col-lg-7">
-									<form:input type="text" path="address.state" id="state"
-										class="form-control input-sm" placeholder="State" />
+									<form:input type="text" path="address.country" id="country"
+										class="form-control input-sm" placeholder="Country" />
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="form-group col-md-12 col-lg-12">
-								<label class="col-md-3 col-lg-3 control-lable" for="email"></label>
+								<label class="col-md-3 col-lg-3 control-lable" for="zipcode"></label>
 								<div class="col-md-7 col-lg-7">
 									<form:input type="text" path="address.zipcode" id="zipcode"
 										class="form-control input-sm" placeholder="ZipCode" />
@@ -163,20 +164,16 @@
 								</div>
 							</div>
 						</div>
-						<div class="row">
 							<c:choose>
 								<c:when test="${edit}">
 									<input type="submit" value="Update"
-										class="btn btn-primary btn-sm" /> or <a
-										href="<c:url value='/list' />">Cancel</a>
+										class="btn btn-primary btn-sm" />
 								</c:when>
 								<c:otherwise>
 									<input type="submit" value="Register"
-										class="btn btn-primary btn-sm" /> or <a
-										href="<c:url value='/list' />">Cancel</a>
+										class="btn btn-primary btn-sm" />
 								</c:otherwise>
 							</c:choose>
-						</div>
 					</div>
 				</form:form>
 			</div>
