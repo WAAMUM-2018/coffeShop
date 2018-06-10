@@ -73,8 +73,8 @@
 								</div>
 							</div>
 						</div>
-						<c:choose>
-							<c:when test="${not edit }">
+						<%-- <c:choose> --%>
+							<%-- <c:when test="${not edit }"> --%>
 								<div class="row">
 									<div class="form-group col-md-12 col-lg-12">
 										<label class="col-md-3 col-lg-3 control-lable" for="userName">User
@@ -100,8 +100,8 @@
 										</div>
 									</div>
 								</div>
-							</c:when>
-						</c:choose>
+							<%-- </c:when> --%>
+						<%-- </c:choose> --%>
 						<div class="row">
 							<div class="form-group col-md-12 col-lg-12">
 								<label class="col-md-3 col-lg-3 control-lable" for="email">Email</label>

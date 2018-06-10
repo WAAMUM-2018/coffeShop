@@ -12,13 +12,13 @@
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
 <body>
-	<div class="generic-container">
+	<div class="container">
 		<%@include file="authheader.jsp"%>
 		<div class="panel panel-default">
 			<!-- Default panel contents -->
 			<div class="panel-heading">
-				<span class="lead">Order - Order Id: ${order.id }   Order Date:
-					${order.orderDate }</span>
+				<span class="lead">Order: ${order.id } </span> <br>
+				 <span class="lead"> Order Date: ${order.orderDate } </span>
 			</div>
 			<table class="table table-hover">
 			<thead>
