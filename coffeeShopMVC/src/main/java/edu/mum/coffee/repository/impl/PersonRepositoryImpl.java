@@ -32,7 +32,7 @@ public class PersonRepositoryImpl implements PersonRepositoryCustom{
 		// TODO Auto-generated method stub
         Query query = entityManager.createNativeQuery("SELECT p.* FROM person as p " +
 
-                "WHERE p.user_id LIKE ?", Person.class);
+                "WHERE p.user_id = ?", Person.class);
 
         query.setParameter(1, userId);
 

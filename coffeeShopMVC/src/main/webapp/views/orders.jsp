@@ -21,9 +21,20 @@
 				<span class="lead">Orders List</span>
 			</div>
 			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Order Id</th>
+						<th>Ordered By</th>
+						<th></th>
+						<th>Order Date</th>
+						
+					</tr>
+				</thead>
 				<c:forEach var="order" items="${orders}">
 					<tr>
 						<td>${order.id}</td>
+						<td>${order.person.id}</td>
+						<td>${order.person.firstName}</td>
 						<td>${order.orderDate}</td>
 						<td><a
 							href="<spring:url value= "/order/orderdetails?orderId=${order.id}"/>"

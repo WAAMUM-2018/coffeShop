@@ -58,27 +58,24 @@ public class OrderLineController {
 	public String createOrder(@ModelAttribute("orderline") Orderline orderLine, Model model) {
 		Order order = orderLine.getOrder();
 		
-		//new order create one
-		if (order == null) {
-			order = new Order();
-			order.setOrderDate(new Date());
-		}
+		// set order date
+		order.setOrderDate(new Date());
 		
-		//Get logged in user and set in order header
+		// Get logged in user and set in order header
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Person person = personService.findByUserId(auth.getName());
 		order.setPerson(person);
-		
+
 		// fetch product from database and connect to order line
 		Product product = productService.getProduct(orderLine.getProduct().getId());
 		orderLine.setProduct(product);
-		
-		//add order line to order
+
+		// add order line to order
 		order.addOrderLine(orderLine);
-		
-		//save order
+
+		// save order
 		orderService.save(order);
-		return "redirect:/order/orderdetails?orderId="+order.getId();
+		return "redirect:/order/orderdetails?orderId=" + order.getId();
 	}
 
 	@ModelAttribute

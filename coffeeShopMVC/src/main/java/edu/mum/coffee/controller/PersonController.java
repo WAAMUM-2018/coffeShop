@@ -3,10 +3,13 @@
  */
 package edu.mum.coffee.controller;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import edu.mum.coffee.domain.Person;
 import edu.mum.coffee.domain.Role;
 import edu.mum.coffee.service.PersonService;
@@ -45,14 +47,27 @@ public class PersonController {
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String createPerson(@ModelAttribute("person") Person person) {
-		/* Set the role as USER */
+		String redirectUrl = "redirect:/";
+		/* Set the role as USER - role 'USER' should have id = 1 in role table*/
 		if (person.getUser() != null) {
-			Role role = roleService.findById(2);
+			Role role = roleService.findById(1);
 			person.getUser().addRole(role);
+			System.out.println("jee");
 		}
-
-		personService.savePerson(person);
-		return "redirect:/person/list";
+		person = personService.savePerson(person);
+		
+		//based on the user role direct to different uris
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+		boolean authorized = authorities.contains(new SimpleGrantedAuthority("ADMIN"));
+		if(authorized) {
+			redirectUrl = "redirect:/person/list";
+		}
+		else {
+			redirectUrl = "redirect:/person/edit?personId=" + person.getId();
+		}
+		
+		return redirectUrl;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
